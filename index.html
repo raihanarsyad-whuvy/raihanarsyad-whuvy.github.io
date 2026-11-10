@@ -1,11 +1,1170 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+    <title>Alex Vance // Fullstack Software Engineer & Architect</title>
     
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            850: '#0f172a',
+                            900: '#0b1120',
+                            950: '#070b14',
+                        },
+                        cyber: {
+                            cyan: '#00f0ff',
+                            blue: '#3b82f6',
+                            purple: '#a855f7',
+                            emerald: '#10b981',
+                            amber: '#f59e0b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 3s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        glow: {
+                            '0%': { opacity: '0.4', filter: 'blur(30px)' },
+                            '100%': { opacity: '0.8', filter: 'blur(45px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070b14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+
+        /* Subtle grid background */
+        .bg-tech-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+        }
+
+        /* Glassmorphism utility */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-panel-hover:hover {
+            border-color: rgba(0, 240, 255, 0.35);
+            box-shadow: 0 0 25px -5px rgba(0, 240, 255, 0.15);
+        }
+
+        /* Glowing text accents */
+        .text-glow-cyan {
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+        }
+        .text-glow-purple {
+            text-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+        }
+
+        /* Code syntax highlights */
+        .syn-keyword { color: #f43f5e; font-weight: 600; }
+        .syn-func { color: #38bdf8; }
+        .syn-type { color: #a855f7; }
+        .syn-str { color: #34d399; }
+        .syn-comment { color: #64748b; font-style: italic; }
+        .syn-prop { color: #fbbf24; }
+        .syn-num { color: #f97316; }
+    </style>
+</head>
+<body class="bg-red-950 text-slate-100 font-sans antialiased relative selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden">
+
+    <!-- Ambient Glowing Light Orbs in Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute -top-40 left-1/4 w-[600px] h-[600px] bg-cyan-600/15 rounded-full blur-[140px] animate-pulse-slow"></div>
+        <div class="absolute top-1/3 -right-20 w-[500px] h-[500px] bg-purple-600/15 rounded-full blur-[140px] animate-float"></div>
+        <div class="absolute bottom-10 left-10 w-[550px] h-[550px] bg-blue-600/10 rounded-full blur-[160px]"></div>
+    </div>
+
+    <!-- Background Tech Grid Pattern -->
+    <div class="fixed inset-0 bg-tech-grid pointer-events-none z-0"></div>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-slate-800/80 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#hero" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/20 via-blue-600/20 to-purple-600/20 border border-cyan-500/30 flex items-center justify-center font-mono font-bold text-cyan-400 group-hover:border-cyan-400 group-hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+                    &lt;/&gt;
+                </div>
+                <div>
+                    <span class="font-mono text-sm tracking-wider font-semibold text-slate-200 group-hover:text-white transition-colors">
+                        Raihan.Arsyad<span class="text-cyan-400">.dev</span>
+                    </span>
+                    <span class="block text-[11px] font-mono text-slate-400">Fullstack Architect</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 font-mono text-xs tracking-wider">
+                <a href="#about" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1.5">
+                    <span class="text-cyan-500/60">01.</span>// about
+                </a>
+                <a href="#skills" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1.5">
+                    <span class="text-cyan-500/60">02.</span>// stack
+                </a>
+                <a href="#projects" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1.5">
+                    <span class="text-cyan-500/60">03.</span>// projects
+                </a>
+                <a href="#terminal-section" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1.5">
+                    <span class="text-cyan-500/60">04.</span>// terminal
+                </a>
+            </nav>
+
+            <!-- Availability & CTA Header Buttons -->
+            <div class="flex items-center space-x-3 sm:space-x-4">
+                <!-- Audio FX Synthesizer Toggle -->
+                <button onclick="toggleAudioFx()" id="audio-toggle-btn" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg bg-slate-900/80 border border-slate-700/80 text-slate-400 hover:text-cyan-300 hover:border-cyan-500/40 text-xs font-mono transition-all" title="Toggle Futuristic Audio FX">
+                    <i data-lucide="volume-2" id="audio-icon" class="w-3.5 h-3.5 text-cyan-400"></i>
+                    <span class="hidden sm:inline" id="audio-status-text">FX ON</span>
+                </button>
+
+                <!-- Command Palette Shortcut Pill -->
+                <button onclick="openCommandPalette()" class="hidden md:flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-400 hover:text-cyan-300 hover:border-cyan-500/40 text-xs font-mono transition-all">
+                    <i data-lucide="command" class="w-3 h-3 text-cyan-400"></i>
+                    <span>Quick Nav</span>
+                    <kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-[10px] text-slate-300">Ctrl K</kbd>
+                </button>
+
+                <!-- Status Badge -->
+                <div class="hidden lg:flex items-center space-x-2 px-3 py-1.5 rounded-full bg-slate-900/80 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span>Available for Hire</span>
+                </div>
+
+                <a href="#contact" class="relative group inline-flex items-center justify-center px-4 py-2 text-xs font-mono font-medium rounded-lg overflow-hidden border border-cyan-500/40 bg-cyan-950/30 hover:bg-cyan-500/20 text-cyan-300 transition-all duration-300 shadow-[0_0_15px_rgba(0,240,255,0.15)] hover:shadow-[0_0_25px_rgba(0,240,255,0.35)]">
+                    <span class="mr-2">Initiate Contact</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+
+        <!-- HERO SECTION -->
+        <section id="hero" class="pt-12 pb-24 md:pt-20 md:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                
+                <!-- Left Column: Pitch & CTA -->
+                <div class="lg:col-span-7 space-y-6">
+                    <!-- Tech Pill Tag -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/30 shadow-[0_0_20px_rgba(0,240,255,0.12)]">
+                        <i data-lucide="cpu" class="w-3.5 h-3.5 text-cyan-400"></i>
+                        <span class="text-xs font-mono uppercase tracking-widest text-cyan-300 font-semibold">
+                            Fullstack Engineering // Next-Gen Web Systems
+                        </span>
+                    </div>
+
+                    <!-- Main Catchy Title -->
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1]">
+                        Architecting <span class="bg-gradient-to-r from-cyan-400 via-sky-300 to-purple-400 bg-clip-text text-transparent text-glow-cyan">Mission-Critical</span> Digital Experiences.
+                    </h1>
+
+                    <!-- Clean Pitch Paragraph -->
+                    <p class="text-slate-400 text-base sm:text-lg max-w-2xl leading-relaxed">
+                        I bridge the gap between high-throughput cloud backends and hyper-fluid reactive interfaces. Specializing in TypeScript, Node.js, distributed microservices, and pixel-perfect interactive web architecture.
+                    </p>
+
+                    <!-- Interactive Code CTA & Buttons -->
+                    <div class="pt-2 flex flex-wrap items-center gap-4">
+                        <a href="#projects" class="relative group px-6 py-3.5 rounded-xl font-mono text-sm font-semibold text-slate-950 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 transition-all duration-300 shadow-[0_0_30px_rgba(0,240,255,0.4)] hover:shadow-[0_0_40px_rgba(0,240,255,0.6)] flex items-center gap-2">
+                            <span>Explore Systems</span>
+                            <i data-lucide="arrow-down-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform"></i>
+                        </a>
+
+                        <button onclick="copyEmailToClipboard()" id="copy-email-btn" class="glass-panel px-5 py-3.5 rounded-xl font-mono text-xs text-slate-300 hover:text-white hover:border-cyan-500/50 transition-all flex items-center gap-2.5 group">
+                            <i data-lucide="copy" class="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform"></i>
+                            <span id="copy-btn-text">alex.vance@engineer.dev</span>
+                        </button>
+
+                        <a href="https://github.com" target="_blank" rel="noreferrer" class="p-3.5 rounded-xl glass-panel text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="p-3.5 rounded-xl glass-panel text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+
+                    <!-- Key Stats Quick Bar -->
+                    <div class="pt-8 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <div class="p-3 rounded-lg bg-slate-900/50 border border-slate-800/60">
+                            <div class="text-2xl font-bold font-mono text-white text-glow-cyan">07+</div>
+                            <div class="text-xs text-slate-400 font-mono uppercase tracking-wider">Years Exp.</div>
+                        </div>
+                        <div class="p-3 rounded-lg bg-slate-900/50 border border-slate-800/60">
+                            <div class="text-2xl font-bold font-mono text-cyan-400">40+</div>
+                            <div class="text-xs text-slate-400 font-mono uppercase tracking-wider">Shipped Apps</div>
+                        </div>
+                        <div class="p-3 rounded-lg bg-slate-900/50 border border-slate-800/60">
+                            <div class="text-2xl font-bold font-mono text-purple-400">99.9%</div>
+                            <div class="text-xs text-slate-400 font-mono uppercase tracking-wider">Uptime SLA</div>
+                        </div>
+                        <div class="p-3 rounded-lg bg-slate-900/50 border border-slate-800/60">
+                            <div class="text-2xl font-bold font-mono text-emerald-400">&lt;50ms</div>
+                            <div class="text-xs text-slate-400 font-mono uppercase tracking-wider">P99 Latency</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Futuristic Interactive Code Terminal Element -->
+                <div class="lg:col-span-5">
+                    <div class="relative">
+                        <!-- Neon Glow Ring behind window -->
+                        <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-cyan-500/30 to-purple-600/30 blur-xl opacity-75 transition duration-1000 group-hover:opacity-100"></div>
+
+                        <!-- Terminal Container -->
+                        <div class="relative glass-panel rounded-2xl border border-slate-700/80 shadow-2xl overflow-hidden font-mono text-xs">
+                            
+                            <!-- Window Titlebar -->
+                            <div class="px-4 py-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
+                                    <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+                                    <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+                                    <span id="ide-filename" class="ml-2 text-[11px] text-slate-300 font-semibold select-none">engineer.config.ts</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-[11px] text-slate-500">
+                                    <span id="ide-lang-pill" class="px-2 py-0.5 rounded bg-slate-800 text-cyan-400 border border-cyan-500/20 font-mono">TypeScript 5.4</span>
+                                    <span>UTF-8</span>
+                                </div>
+                            </div>
+
+                            <!-- Tabs Bar (Clickable tabs: engineer.ts, deploy.sh, stack.json) -->
+                            <div class="flex border-b border-slate-800 bg-slate-950/60 text-[11px] select-none">
+                                <button onclick="switchIdeTab('engineer')" id="tab-btn-engineer" class="px-4 py-2 border-r border-slate-800 bg-slate-900/80 text-cyan-300 border-t-2 border-t-cyan-400 flex items-center gap-2 cursor-pointer transition-colors">
+                                    <i data-lucide="file-code" class="w-3.5 h-3.5 text-cyan-400"></i>
+                                    <span>engineer.ts</span>
+                                </button>
+                                <button onclick="switchIdeTab('deploy')" id="tab-btn-deploy" class="px-4 py-2 border-r border-slate-800 text-slate-400 hover:text-cyan-300 flex items-center gap-2 cursor-pointer transition-colors group">
+                                    <i data-lucide="terminal" class="w-3.5 h-3.5 text-purple-400 group-hover:text-cyan-300 transition-colors"></i>
+                                    <span>deploy.sh</span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping ml-0.5"></span>
+                                </button>
+                                <button onclick="switchIdeTab('stack')" id="tab-btn-stack" class="px-4 py-2 text-slate-500 hover:text-slate-300 flex items-center gap-2 cursor-pointer transition-colors">
+                                    <i data-lucide="settings" class="w-3.5 h-3.5 text-slate-400"></i>
+                                    <span>stack.json</span>
+                                </button>
+                            </div>
+
+                            <!-- Tab 1: Code Content Area (engineer.ts) -->
+                            <div id="code-content-engineer" class="p-5 overflow-x-auto text-[13px] leading-relaxed select-text space-y-1">
+                                <div><span class="syn-keyword">import</span> { <span class="syn-type">Architect</span>, <span class="syn-type">FullstackEngineer</span> } <span class="syn-keyword">from</span> <span class="syn-str">'@future/core'</span>;</div>
+                                <div class="text-slate-600">// Initialize profile descriptor</div>
+                                <div><span class="syn-keyword">export const</span> <span class="syn-prop">engineer</span>: <span class="syn-type">FullstackEngineer</span> = {</div>
+                                <div class="pl-4"><span class="syn-prop">name</span>: <span class="syn-str">'Alex Vance'</span>,</div>
+                                <div class="pl-4"><span class="syn-prop">role</span>: <span class="syn-str">'Principal Fullstack Dev'</span>,</div>
+                                <div class="pl-4"><span class="syn-prop">coreStack</span>: [</div>
+                                <div class="pl-8"><span class="syn-str">'React/Next.js'</span>, <span class="syn-str">'TypeScript'</span>,</div>
+                                <div class="pl-8"><span class="syn-str">'Node.js'</span>, <span class="syn-str">'Go/Rust'</span>,</div>
+                                <div class="pl-8"><span class="syn-str">'PostgreSQL'</span>, <span class="syn-str">'Kubernetes'</span></div>
+                                <div class="pl-4">],</div>
+                                <div class="pl-4"><span class="syn-prop">architectureFocus</span>: {</div>
+                                <div class="pl-8"><span class="syn-prop">highConcurrency</span>: <span class="syn-keyword">true</span>,</div>
+                                <div class="pl-8"><span class="syn-prop">cloudNative</span>: <span class="syn-keyword">true</span>,</div>
+                                <div class="pl-8"><span class="syn-prop">responsiveUI</span>: <span class="syn-keyword">true</span>,</div>
+                                <div class="pl-8"><span class="syn-prop">cleanCodeObsession</span>: <span class="syn-num">100</span></div>
+                                <div class="pl-4">},</div>
+                                <div class="pl-4"><span class="syn-func">buildFuture</span>: <span class="syn-keyword">async</span> () =&gt; {</div>
+                                <div class="pl-8"><span class="syn-keyword">await</span> <span class="syn-func">deployToEdge</span>({ <span class="syn-prop">speed</span>: <span class="syn-str">'instant'</span>, <span class="syn-prop">security</span>: <span class="syn-str">'bulletproof'</span> });</div>
+                                <div class="pl-8"><span class="syn-keyword">return</span> <span class="syn-str">'System operational ⚡'</span>;</div>
+                                <div class="pl-4">}</div>
+                                <div>};</div>
+                            </div>
+
+                            <!-- Tab 2: Code Content Area (deploy.sh) -->
+                            <div id="code-content-deploy" class="hidden p-5 overflow-x-auto text-[13px] leading-relaxed select-text space-y-1 font-mono">
+                                <div class="syn-comment">#!/usr/bin/env bash</div>
+                                <div class="syn-comment"># Zero-Downtime Production Edge Deployment Pipeline</div>
+                                <div><span class="syn-keyword">set</span> -euo pipefail</div>
+                                <div class="text-slate-600">// Target infrastructure topology</div>
+                                <div><span class="syn-prop">TARGET_ENV</span>=<span class="syn-str">"production"</span></div>
+                                <div><span class="syn-prop">EDGE_REGION</span>=<span class="syn-str">"global-multi-cloud"</span></div>
+                                <div><span class="syn-prop">K8S_CLUSTER</span>=<span class="syn-str">"k8s.vance.production"</span></div>
+                                <br>
+                                <div><span class="syn-func">deploy_to_edge</span>() {</div>
+                                <div class="pl-4"><span class="syn-keyword">echo</span> <span class="syn-str">"⚡ [1/4] Packaging multi-stage OCI containers..."</span></div>
+                                <div class="pl-4 text-cyan-300">docker build --target=production -t vance-core:v2.6 .</div>
+                                <div class="pl-4"><span class="syn-keyword">echo</span> <span class="syn-str">"🧪 [2/4] Executing test suite &amp; static analysis..."</span></div>
+                                <div class="pl-4 text-cyan-300">npm run test:ci -- --coverage --min=95</div>
+                                <div class="pl-4"><span class="syn-keyword">echo</span> <span class="syn-str">"🚀 [3/4] Rolling out canary release to Kubernetes..."</span></div>
+                                <div class="pl-4 text-cyan-300">kubectl apply -f ./k8s/canary-rollout.yaml</div>
+                                <div class="pl-4 text-cyan-300">kubectl rollout status deployment/vance-engine</div>
+                                <div class="pl-4"><span class="syn-keyword">echo</span> <span class="syn-str">"✔ [4/4] Verifying P99 latency: &lt;14ms (Health: 200 OK)"</span></div>
+                                <div class="pl-4"><span class="syn-keyword">return</span> <span class="syn-num">0</span></div>
+                                <div>}</div>
+                                <br>
+                                <div><span class="syn-func">deploy_to_edge</span></div>
+                            </div>
+
+                            <!-- Tab 3: Code Content Area (stack.json) -->
+                            <div id="code-content-stack" class="hidden p-5 overflow-x-auto text-[13px] leading-relaxed select-text space-y-1 font-mono">
+                                <div>{</div>
+                                <div class="pl-4"><span class="syn-prop">"$schema"</span>: <span class="syn-str">"https://vance.dev/schemas/fullstack.json"</span>,</div>
+                                <div class="pl-4"><span class="syn-prop">"engine"</span>: <span class="syn-str">"node@22.x"</span>,</div>
+                                <div class="pl-4"><span class="syn-prop">"frontend"</span>: [<span class="syn-str">"React 19"</span>, <span class="syn-str">"Next.js 15"</span>, <span class="syn-str">"TypeScript"</span>, <span class="syn-str">"Tailwind"</span>],</div>
+                                <div class="pl-4"><span class="syn-prop">"backend"</span>: [<span class="syn-str">"Node.js"</span>, <span class="syn-str">"Go (gRPC)"</span>, <span class="syn-str">"Rust Microservices"</span>],</div>
+                                <div class="pl-4"><span class="syn-prop">"databases"</span>: [<span class="syn-str">"PostgreSQL 16"</span>, <span class="syn-str">"Redis Enterprise"</span>, <span class="syn-str">"ClickHouse"</span>],</div>
+                                <div class="pl-4"><span class="syn-prop">"observability"</span>: {</div>
+                                <div class="pl-8"><span class="syn-prop">"metrics"</span>: <span class="syn-str">"OpenTelemetry + Grafana"</span>,</div>
+                                <div class="pl-8"><span class="syn-prop">"availability"</span>: <span class="syn-str">"99.99%"</span>,</div>
+                                <div class="pl-8"><span class="syn-prop">"p99Latency"</span>: <span class="syn-str">"12ms"</span></div>
+                                <div class="pl-4">}</div>
+                                <div>}</div>
+                            </div>
+
+                            <!-- Interactive Run Action Bar inside code snippet -->
+                            <div class="px-4 py-2.5 bg-slate-900/90 border-t border-slate-800 flex items-center justify-between">
+                                <div class="flex items-center space-x-2 text-[11px] text-slate-400">
+                                    <span id="compiler-pulse" class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                                    <span id="compiler-status">Ready to execute</span>
+                                </div>
+                                <button onclick="executeCurrentTab()" id="btn-run-code" class="px-3.5 py-1.5 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 hover:from-cyan-500/30 hover:to-blue-500/30 border border-cyan-400/40 rounded-lg text-cyan-300 text-xs font-mono flex items-center space-x-1.5 transition-all shadow-[0_0_12px_rgba(0,240,255,0.2)] hover:shadow-[0_0_20px_rgba(0,240,255,0.4)]">
+                                    <i data-lucide="play" id="btn-run-icon" class="w-3 h-3 fill-cyan-400"></i>
+                                    <span id="btn-run-text">Run Code</span>
+                                </button>
+                            </div>
+
+                            <!-- Execution Output Console (Hidden by default, shown on Run) -->
+                            <div id="execution-output" class="hidden px-4 py-3 bg-black/90 border-t border-slate-800 text-[11px] font-mono">
+                                <div id="execution-logs" class="space-y-1">
+                                    <!-- Dynamic logs will be injected here -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TECH STACK & SYSTEM CAPABILITIES -->
+        <section id="skills" class="py-20 border-t border-slate-800/80 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-14">
+                    <div>
+                        <div class="flex items-center space-x-2 text-cyan-400 font-mono text-xs uppercase tracking-widest mb-2">
+                            <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                            <span>Engineered Capabilities</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+                            The Modern Fullstack Architecture Stack
+                        </h2>
+                    </div>
+                    <p class="text-slate-400 font-mono text-xs mt-3 md:mt-0 max-w-md">
+                        // Precision-selected technologies delivering end-to-end resilience, sub-second responses, and maintainability.
+                    </p>
+                </div>
+
+                <!-- 4 Architectural Pillars Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <!-- 1. Frontend & UX -->
+                    <div class="glass-panel glass-panel-hover rounded-xl p-6 transition-all duration-300 relative group">
+                        <div class="w-12 h-12 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-5 group-hover:scale-110 transition-transform">
+                            <i data-lucide="layout" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Frontend &amp; UX</h3>
+                        <p class="text-slate-400 text-xs mb-4 leading-relaxed">
+                            Hyper-responsive, accessible user interfaces with micro-interactions and zero-lag rendering.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-cyan-300">React 19</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-cyan-300">Next.js 15</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-cyan-300">TypeScript</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-cyan-300">Tailwind CSS</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-cyan-300">WebGL/Three.js</span>
+                        </div>
+                    </div>
+
+                    <!-- 2. Backend & Distributed Systems -->
+                    <div class="glass-panel glass-panel-hover rounded-xl p-6 transition-all duration-300 relative group">
+                        <div class="w-12 h-12 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 mb-5 group-hover:scale-110 transition-transform">
+                            <i data-lucide="server" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Backend &amp; APIs</h3>
+                        <p class="text-slate-400 text-xs mb-4 leading-relaxed">
+                            Resilient distributed services, event-driven streaming, and high-concurrency microservices.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-blue-300">Node.js</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-blue-300">Go (Golang)</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-blue-300">gRPC</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-blue-300">GraphQL</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-blue-300">Kafka/RabbitMQ</span>
+                        </div>
+                    </div>
+
+                    <!-- 3. Databases & Cache -->
+                    <div class="glass-panel glass-panel-hover rounded-xl p-6 transition-all duration-300 relative group">
+                        <div class="w-12 h-12 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-5 group-hover:scale-110 transition-transform">
+                            <i data-lucide="database" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Data &amp; Persistence</h3>
+                        <p class="text-slate-400 text-xs mb-4 leading-relaxed">
+                            ACID compliant schemas, vector embeddings, high-throughput caching and time-series analytics.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-purple-300">PostgreSQL</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-purple-300">Redis Enterprise</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-purple-300">pgvector</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-purple-300">Prisma</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-purple-300">ClickHouse</span>
+                        </div>
+                    </div>
+
+                    <!-- 4. DevOps & Cloud Native -->
+                    <div class="glass-panel glass-panel-hover rounded-xl p-6 transition-all duration-300 relative group">
+                        <div class="w-12 h-12 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-5 group-hover:scale-110 transition-transform">
+                            <i data-lucide="cloud-lightning" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Cloud &amp; DevOps</h3>
+                        <p class="text-slate-400 text-xs mb-4 leading-relaxed">
+                            Automated CI/CD pipelines, container orchestration, zero-downtime canary deployments.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-emerald-300">Docker</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-emerald-300">Kubernetes</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-emerald-300">AWS / GCP</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-emerald-300">Terraform</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-emerald-300">GitHub Actions</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS GRID SECTION -->
+        <section id="projects" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <div class="flex items-center space-x-2 text-cyan-400 font-mono text-xs uppercase tracking-widest mb-2">
+                        <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                        <span>Flagship Implementations</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+                        Production Projects &amp; Architectures
+                    </h2>
+                </div>
+
+                <!-- Category Filter Pills -->
+                <div class="flex flex-wrap gap-2 mt-4 md:mt-0 font-mono text-xs">
+                    <button onclick="filterProjects('all')" class="project-filter-btn px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/40" data-filter="all">All</button>
+                    <button onclick="filterProjects('fullstack')" class="project-filter-btn px-3 py-1.5 rounded-lg glass-panel text-slate-400 hover:text-white border-slate-800" data-filter="fullstack">Fullstack</button>
+                    <button onclick="filterProjects('cloud')" class="project-filter-btn px-3 py-1.5 rounded-lg glass-panel text-slate-400 hover:text-white border-slate-800" data-filter="cloud">Cloud &amp; Distributed</button>
+                    <button onclick="filterProjects('ai')" class="project-filter-btn px-3 py-1.5 rounded-lg glass-panel text-slate-400 hover:text-white border-slate-800" data-filter="ai">AI Systems</button>
+                </div>
+            </div>
+
+            <!-- Grid of Projects -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Project 1: HyperScale Real-Time Telemetry Engine -->
+                <div class="project-card glass-panel rounded-2xl overflow-hidden border border-slate-800/80 hover:border-cyan-500/40 transition-all duration-300 flex flex-col group" data-category="cloud">
+                    <div class="relative h-48 bg-slate-900 overflow-hidden border-b border-slate-800 flex items-center justify-center p-6">
+                        <!-- Abstract Visual Tech Graphic -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-cyan-950/40 via-slate-900 to-purple-950/30"></div>
+                        <div class="relative z-10 w-full font-mono text-[11px] text-slate-400 bg-black/60 rounded-lg p-3 border border-slate-800">
+                            <div class="flex items-center justify-between text-cyan-400 pb-1 mb-2 border-b border-slate-800">
+                                <span>telemetry_stream.v1</span>
+                                <span class="text-emerald-400">● LIVE</span>
+                            </div>
+                            <div class="text-slate-300">Throughput: <span class="text-cyan-300 font-bold">1.2M events/sec</span></div>
+                            <div class="text-slate-400">Global Cluster: <span class="text-purple-300">24 nodes synced</span></div>
+                            <div class="text-slate-400">P99 Query Time: <span class="text-emerald-300 font-bold">14ms</span></div>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[11px] font-mono text-cyan-400 uppercase tracking-widest font-semibold">Distributed Streaming</span>
+                                <span class="text-xs text-slate-500 font-mono">2026</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors mb-2">
+                                HyperScale Telemetry Grid
+                            </h3>
+                            <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                                Low-latency data stream aggregator processing 1.2M events per second with live WebGL time-series visualizations and automatic failover clustering.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-5 font-mono text-[10px]">
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-cyan-300">Go</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-cyan-300">Apache Kafka</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-cyan-300">Next.js 15</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-cyan-300">ClickHouse</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-3 border-t border-slate-800/80">
+                                <a href="#" class="inline-flex items-center gap-1.5 text-xs font-mono text-cyan-400 hover:text-cyan-300">
+                                    <span>Architecture Docs</span>
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                                <a href="#" class="inline-flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-white">
+                                    <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                                    <span>Code</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Nova AI Agentic Workspace -->
+                <div class="project-card glass-panel rounded-2xl overflow-hidden border border-slate-800/80 hover:border-cyan-500/40 transition-all duration-300 flex flex-col group" data-category="ai">
+                    <div class="relative h-48 bg-slate-900 overflow-hidden border-b border-slate-800 flex items-center justify-center p-6">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-purple-950/40 via-slate-900 to-cyan-950/30"></div>
+                        <div class="relative z-10 w-full font-mono text-[11px] text-slate-400 bg-black/60 rounded-lg p-3 border border-slate-800">
+                            <div class="flex items-center justify-between text-purple-400 pb-1 mb-2 border-b border-slate-800">
+                                <span>autonomous_agent.py</span>
+                                <span class="text-purple-400">COGNITIVE ENGINE</span>
+                            </div>
+                            <div class="text-slate-300">Status: <span class="text-emerald-400">Executing multi-step plan</span></div>
+                            <div class="text-slate-400">Context Window: <span class="text-cyan-300">2M tokens</span></div>
+                            <div class="text-slate-400">MCP Integrations: <span class="text-amber-400">18 active tools</span></div>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[11px] font-mono text-purple-400 uppercase tracking-widest font-semibold">AI Orchestration</span>
+                                <span class="text-xs text-slate-500 font-mono">2026</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white group-hover:text-purple-300 transition-colors mb-2">
+                                Nova Autonomous Studio
+                            </h3>
+                            <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                                Enterprise-ready AI developer suite enabling multi-agent self-healing deployments, dynamic tool invocation, and visual state-graph tracing.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-5 font-mono text-[10px]">
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-purple-300">Python 3.12</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-purple-300">FastAPI</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-purple-300">React Flow</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-purple-300">pgvector</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-3 border-t border-slate-800/80">
+                                <a href="#" class="inline-flex items-center gap-1.5 text-xs font-mono text-purple-400 hover:text-purple-300">
+                                    <span>Interactive Demo</span>
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                                <a href="#" class="inline-flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-white">
+                                    <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                                    <span>Code</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Synthetix Pay & Settlement Gateway -->
+                <div class="project-card glass-panel rounded-2xl overflow-hidden border border-slate-800/80 hover:border-cyan-500/40 transition-all duration-300 flex flex-col group" data-category="fullstack">
+                    <div class="relative h-48 bg-slate-900 overflow-hidden border-b border-slate-800 flex items-center justify-center p-6">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-blue-950/40 via-slate-900 to-emerald-950/30"></div>
+                        <div class="relative z-10 w-full font-mono text-[11px] text-slate-400 bg-black/60 rounded-lg p-3 border border-slate-800">
+                            <div class="flex items-center justify-between text-blue-400 pb-1 mb-2 border-b border-slate-800">
+                                <span>tx_settlement.ts</span>
+                                <span class="text-cyan-400">ENCRYPTED</span>
+                            </div>
+                            <div class="text-slate-300">Processed Vol: <span class="text-emerald-400 font-bold">$42.8M USD</span></div>
+                            <div class="text-slate-400">Reconciliation: <span class="text-cyan-300">Zero divergence</span></div>
+                            <div class="text-slate-400">Audit Grade: <span class="text-emerald-300 font-bold">SOC 2 Type II</span></div>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[11px] font-mono text-blue-400 uppercase tracking-widest font-semibold">Fintech Platform</span>
+                                <span class="text-xs text-slate-500 font-mono">2025</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white group-hover:text-blue-300 transition-colors mb-2">
+                                Synthetix Settlement Engine
+                            </h3>
+                            <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                                Microservices payment processor featuring idempotent ledger accounting, automated fraud heuristics, and Stripe/Plaid bank webhooks.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-5 font-mono text-[10px]">
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-blue-300">Node.js</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-blue-300">PostgreSQL</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-blue-300">Redis</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-blue-300">Docker</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-3 border-t border-slate-800/80">
+                                <a href="#" class="inline-flex items-center gap-1.5 text-xs font-mono text-blue-400 hover:text-blue-300">
+                                    <span>Case Study</span>
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                                <a href="#" class="inline-flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-white">
+                                    <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                                    <span>Code</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- INTERACTIVE CLI TERMINAL SECTION -->
+        <section id="terminal-section" class="py-20 bg-slate-900/60 border-y border-slate-800/80 relative">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center mb-8">
+                    <span class="inline-block px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-mono mb-3">
+                        Interactive Shell Interface
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white">Direct CLI Console</h2>
+                    <p class="text-slate-400 text-xs font-mono mt-1">
+                        Try running commands like: <code class="text-cyan-300 font-bold">help</code>, <code class="text-cyan-300 font-bold">skills</code>, <code class="text-cyan-300 font-bold">projects</code>, <code class="text-cyan-300 font-bold">sudo hire</code>, <code class="text-cyan-300 font-bold">clear</code>
+                    </p>
+                </div>
+
+                <!-- CLI Window Container -->
+                <div class="glass-panel rounded-2xl border border-slate-700/80 shadow-2xl overflow-hidden font-mono text-xs">
+                    <div class="px-4 py-3 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                            <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                            <span class="ml-2 text-slate-400 text-[11px]">guest@vance-os: ~</span>
+                        </div>
+                        <span class="text-[11px] text-slate-500">v2.6.4 (arm64-darwin)</span>
+                    </div>
+
+                    <div id="terminal-body" class="p-5 h-64 overflow-y-auto space-y-2 select-text bg-slate-950/90 text-slate-300">
+                        <div class="text-cyan-400">Connected to Alex Vance Core Node [Session: 0x9f7a]</div>
+                        <div class="text-slate-500">Type <span class="text-cyan-300 font-bold">'help'</span> to see available system commands or <span class="text-purple-400 font-bold">'sudo hire'</span> to schedule interview.</div>
+                    </div>
+
+                    <!-- Command Input Bar -->
+                    <div class="px-4 py-3 bg-slate-900/90 border-t border-slate-800 flex items-center space-x-2">
+                        <span class="text-cyan-400 font-bold font-mono">guest@vance:~$</span>
+                        <input id="terminal-input" type="text" placeholder="type a command..." autocomplete="off" spellcheck="false" class="flex-1 bg-transparent text-slate-100 placeholder-slate-600 focus:outline-none font-mono text-xs">
+                        <button onclick="handleTerminalSubmit()" class="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 hover:bg-cyan-500/30 text-[11px]">Send</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CALL TO ACTION / CONTACT SECTION -->
+        <section id="contact" class="py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative glass-panel rounded-3xl p-8 sm:p-12 border border-cyan-500/30 shadow-[0_0_50px_rgba(0,240,255,0.08)] overflow-hidden">
+                
+                <!-- Glowing corner gradient -->
+                <div class="absolute -right-20 -top-20 w-80 h-80 bg-gradient-to-br from-cyan-500/20 to-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-cyan-500/30 text-cyan-400 text-xs font-mono">
+                            <i data-lucide="radio" class="w-3.5 h-3.5 animate-pulse"></i>
+                            <span>Transmission Channel</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                            Ready to engineer your next breakthrough?
+                        </h2>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Whether you need to scale an existing system to millions of concurrent users or build an MVP with flawless architecture, my inbox is open.
+                        </p>
+                        <div class="pt-2 flex flex-wrap gap-4 font-mono text-xs">
+                            <div class="flex items-center gap-2 text-slate-300">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+                                <span>Full-time Senior/Lead Roles</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-slate-300">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+                                <span>High-Impact Consulting</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 flex flex-col space-y-3">
+                        <a href="mailto:alex.vance@engineer.dev" class="w-full text-center py-4 px-6 rounded-xl font-mono text-sm font-semibold bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 text-slate-950 hover:brightness-110 transition-all shadow-[0_0_25px_rgba(0,240,255,0.35)] flex items-center justify-center gap-2">
+                            <i data-lucide="mail" class="w-4 h-4"></i>
+                            <span>alex.vance@engineer.dev</span>
+                        </a>
+
+                        <button onclick="copyEmailToClipboard()" class="w-full py-3.5 px-6 rounded-xl font-mono text-xs text-slate-300 glass-panel hover:border-cyan-400/50 hover:text-white transition-all flex items-center justify-center gap-2">
+                            <i data-lucide="copy" class="w-4 h-4 text-cyan-400"></i>
+                            <span>Copy Email Address</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800/80 py-10 bg-slate-950 font-mono text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span>System Status: All services operational (100.0%)</span>
+            </div>
+            <div>
+                © 2026 Alex Vance. Engineered with Precision &amp; Modern Web Standards.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Audio FX using Web Audio API
+        let audioContext = null;
+        let audioFxEnabled = true;
+
+        function playTechBeep(freq = 640, duration = 0.08, type = 'sine') {
+            if (!audioFxEnabled) return;
+            try {
+                if (!audioContext) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioContext.currentTime);
+                gain.gain.setValueAtTime(0.05, audioContext.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+                osc.start();
+                osc.stop(audioContext.currentTime + duration);
+            } catch (e) {
+                // AudioContext not allowed or unsupported
+            }
+        }
+
+        function toggleAudioFx() {
+            audioFxEnabled = !audioFxEnabled;
+            const statusText = document.getElementById('audio-status-text');
+            const icon = document.getElementById('audio-icon');
+            if (statusText) statusText.innerText = audioFxEnabled ? 'FX ON' : 'FX OFF';
+            if (icon) {
+                icon.setAttribute('data-lucide', audioFxEnabled ? 'volume-2' : 'volume-x');
+                lucide.createIcons();
+            }
+            if (audioFxEnabled) playTechBeep(880, 0.1);
+        }
+
+        // IDE Tab Switching System (engineer.ts, deploy.sh, stack.json)
+        let currentIdeTab = 'engineer';
+
+        function switchIdeTab(tab) {
+            currentIdeTab = tab;
+            playTechBeep(520, 0.06);
+
+            const tabEngineer = document.getElementById('tab-btn-engineer');
+            const tabDeploy = document.getElementById('tab-btn-deploy');
+            const tabStack = document.getElementById('tab-btn-stack');
+
+            const codeEngineer = document.getElementById('code-content-engineer');
+            const codeDeploy = document.getElementById('code-content-deploy');
+            const codeStack = document.getElementById('code-content-stack');
+
+            const ideFilename = document.getElementById('ide-filename');
+            const ideLangPill = document.getElementById('ide-lang-pill');
+            const btnRunText = document.getElementById('btn-run-text');
+            const compilerStatus = document.getElementById('compiler-status');
+            const outputBox = document.getElementById('execution-output');
+
+            // Reset tab button styles
+            const inactiveClass = 'px-4 py-2 border-r border-slate-800 text-slate-400 hover:text-cyan-300 flex items-center gap-2 cursor-pointer transition-colors';
+            const activeClass = 'px-4 py-2 border-r border-slate-800 bg-slate-900/80 text-cyan-300 border-t-2 border-t-cyan-400 flex items-center gap-2 cursor-pointer transition-colors';
+
+            if (tabEngineer) tabEngineer.className = (tab === 'engineer') ? activeClass : inactiveClass;
+            if (tabDeploy) tabDeploy.className = (tab === 'deploy') ? activeClass : inactiveClass;
+            if (tabStack) tabStack.className = (tab === 'stack') ? activeClass.replace('border-r', '') : inactiveClass.replace('border-r', '');
+
+            // Toggle Code Panels
+            if (codeEngineer) codeEngineer.classList.toggle('hidden', tab !== 'engineer');
+            if (codeDeploy) codeDeploy.classList.toggle('hidden', tab !== 'deploy');
+            if (codeStack) codeStack.classList.toggle('hidden', tab !== 'stack');
+
+            // Update Metadata Bar & Run Button
+            if (tab === 'engineer') {
+                if (ideFilename) ideFilename.innerText = 'engineer.config.ts';
+                if (ideLangPill) ideLangPill.innerText = 'TypeScript 5.4';
+                if (btnRunText) btnRunText.innerText = 'Run engineer.ts';
+                if (compilerStatus) compilerStatus.innerText = 'TypeScript compiler ready';
+            } else if (tab === 'deploy') {
+                if (ideFilename) ideFilename.innerText = 'deploy.sh';
+                if (ideLangPill) ideLangPill.innerText = 'Bash 5.2 / Shell';
+                if (btnRunText) btnRunText.innerText = 'Execute deploy.sh';
+                if (compilerStatus) compilerStatus.innerText = 'K8s pipeline ready';
+            } else if (tab === 'stack') {
+                if (ideFilename) ideFilename.innerText = 'stack.json';
+                if (ideLangPill) ideLangPill.innerText = 'JSON Schema 2020-12';
+                if (btnRunText) btnRunText.innerText = 'Validate stack.json';
+                if (compilerStatus) compilerStatus.innerText = 'Schema validator ready';
+            }
+
+            if (outputBox) outputBox.classList.add('hidden');
+        }
+
+        // Execute Current Tab (engineer.ts, deploy.sh, stack.json)
+        function executeCurrentTab() {
+            playTechBeep(740, 0.12, 'square');
+            const outputBox = document.getElementById('execution-output');
+            const outputLogs = document.getElementById('execution-logs');
+            const compilerStatus = document.getElementById('compiler-status');
+            const compilerPulse = document.getElementById('compiler-pulse');
+
+            if (!outputBox || !outputLogs) return;
+
+            outputBox.classList.remove('hidden');
+            outputLogs.innerHTML = '';
+
+            if (currentIdeTab === 'deploy') {
+                // Step-by-step Bash deployment simulation
+                if (compilerStatus) compilerStatus.innerText = 'Deploying to Kubernetes...';
+                if (compilerPulse) compilerPulse.className = 'inline-block w-2 h-2 rounded-full bg-cyan-400 animate-ping';
+
+                const steps = [
+                    { delay: 100, text: '<span class="text-slate-400">&gt; bash ./deploy.sh --target=production --cluster=k8s.vance.production</span>' },
+                    { delay: 450, text: '<span class="text-cyan-400">⚡ [1/4]</span> Packaging multi-stage OCI container <span class="text-emerald-400 font-bold">✔ [DONE: 620ms]</span>' },
+                    { delay: 900, text: '<span class="text-cyan-400">🧪 [2/4]</span> Running 48 test suites &amp; security linters <span class="text-emerald-400 font-bold">✔ [48 passed, 0 failures]</span>' },
+                    { delay: 1400, text: '<span class="text-purple-400">☸ [3/4]</span> Rolling out canary pods to production k8s cluster... <span class="text-emerald-400 font-bold">✔ [100% synced]</span>' },
+                    { delay: 1850, text: '<span class="text-emerald-400">⚡ [4/4]</span> Global Edge Health Check: <span class="text-white font-bold">200 OK</span> (P99 Latency: <span class="text-cyan-300 font-bold">11ms</span>)' },
+                    { delay: 2200, text: '<span class="text-emerald-300 font-bold">🚀 [SUCCESS]: Zero-downtime deployment finished. All 18 edge nodes synchronized!</span>' }
+                ];
+
+                steps.forEach(step => {
+                    setTimeout(() => {
+                        const line = document.createElement('div');
+                        line.innerHTML = step.text;
+                        outputLogs.appendChild(line);
+                        playTechBeep(600 + Math.random() * 200, 0.05);
+                    }, step.delay);
+                });
+
+                setTimeout(() => {
+                    if (compilerStatus) compilerStatus.innerText = 'Deployment operational (v2.6.4)';
+                    if (compilerPulse) compilerPulse.className = 'inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping';
+                    playTechBeep(920, 0.2);
+                }, 2300);
+
+            } else if (currentIdeTab === 'engineer') {
+                if (compilerStatus) compilerStatus.innerText = 'Compiling TypeScript AST...';
+                setTimeout(() => {
+                    outputLogs.innerHTML = `
+                        <div class="text-slate-400">&gt; tsc --noEmit &amp;&amp; node -r ts-node/register engineer.ts</div>
+                        <div class="text-cyan-300">✔ TypeScript compilation successful (0 errors, 118ms)</div>
+                        <div class="text-white">🚀 [PROFILE]: Alex Vance // Principal Fullstack Dev</div>
+                        <div class="text-emerald-400 font-bold">✔ System operational ⚡ (Edge latency: 12ms)</div>
+                    `;
+                    if (compilerStatus) compilerStatus.innerText = 'Execution successful';
+                    playTechBeep(880, 0.1);
+                }, 400);
+
+            } else if (currentIdeTab === 'stack') {
+                if (compilerStatus) compilerStatus.innerText = 'Validating JSON Schema...';
+                setTimeout(() => {
+                    outputLogs.innerHTML = `
+                        <div class="text-slate-400">&gt; npx ajv-cli validate -s schema.json -d stack.json</div>
+                        <div class="text-emerald-400">✔ Schema verified (RFC 8259 compliance)</div>
+                        <div class="text-cyan-300">Tier Status: Frontend (OK) | Backend (OK) | Databases (OK) | Observability (OK)</div>
+                    `;
+                    if (compilerStatus) compilerStatus.innerText = 'All stacks verified';
+                    playTechBeep(880, 0.1);
+                }, 350);
+            }
+        }
+
+        // Copy Email function with visual feedback
+        function copyEmailToClipboard() {
+            playTechBeep(700, 0.08);
+            const email = 'alex.vance@engineer.dev';
+            navigator.clipboard.writeText(email).then(() => {
+                const btn = document.getElementById('copy-email-btn');
+                const btnText = document.getElementById('copy-btn-text');
+                if (btnText) {
+                    const originalText = btnText.innerText;
+                    btnText.innerText = 'Copied to Clipboard! ✓';
+                    btnText.classList.add('text-cyan-300');
+                    setTimeout(() => {
+                        btnText.innerText = originalText;
+                        btnText.classList.remove('text-cyan-300');
+                    }, 2000);
+                }
+                alert('Copied ' + email + ' to clipboard!');
+            }).catch(() => {
+                prompt('Copy email:', 'alex.vance@engineer.dev');
+            });
+        }
+
+        // Project filter tabs
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.project-filter-btn');
+
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-filter') === category) {
+                    btn.className = 'project-filter-btn px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/40';
+                } else {
+                    btn.className = 'project-filter-btn px-3 py-1.5 rounded-lg glass-panel text-slate-400 hover:text-white border-slate-800';
+                }
+            });
+
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'all' || cardCat === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Interactive Shell in Terminal Section
+        const terminalInput = document.getElementById('terminal-input');
+        const terminalBody = document.getElementById('terminal-body');
+
+        if (terminalInput) {
+            terminalInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    handleTerminalSubmit();
+                }
+            });
+        }
+
+        function handleTerminalSubmit() {
+            if (!terminalInput || !terminalBody) return;
+            const command = terminalInput.value.trim().toLowerCase();
+            if (!command) return;
+
+            // Echo command
+            const cmdLine = document.createElement('div');
+            cmdLine.innerHTML = `<span class="text-cyan-400">guest@vance:~$</span> <span class="text-white">${escapeHtml(command)}</span>`;
+            terminalBody.appendChild(cmdLine);
+
+            const response = document.createElement('div');
+            response.className = 'text-slate-300 pl-2 border-l border-cyan-500/40 my-1';
+
+            switch (command) {
+                case 'help':
+                    response.innerHTML = `
+                        Available commands:<br>
+                        - <span class="text-cyan-300 font-bold">skills</span>: List technical architecture proficiencies<br>
+                        - <span class="text-cyan-300 font-bold">projects</span>: Summarize flagship shipped platforms<br>
+                        - <span class="text-cyan-300 font-bold">deploy</span> or <span class="text-cyan-300 font-bold">./deploy.sh</span>: Trigger Kubernetes production deployment<br>
+                        - <span class="text-cyan-300 font-bold">contact</span>: Reach out directly<br>
+                        - <span class="text-cyan-300 font-bold">sudo hire</span>: Schedule priority interview<br>
+                        - <span class="text-cyan-300 font-bold">clear</span>: Clear console history
+                    `;
+                    break;
+                case 'deploy':
+                case './deploy.sh':
+                case 'bash deploy.sh':
+                    switchIdeTab('deploy');
+                    executeCurrentTab();
+                    response.innerHTML = `
+                        <span class="text-emerald-400 font-bold">🚀 Executing deploy.sh:</span> Switched IDE above to deploy.sh and triggered automated canary rollout to Kubernetes!
+                    `;
+                    break;
+                case 'skills':
+                    response.innerHTML = `TypeScript, React/Next.js, Node.js, Go, PostgreSQL, Redis, Kubernetes, Docker, AWS, GraphQL, Kafka, AI/LLM orchestration.`;
+                    break;
+                case 'projects':
+                    response.innerHTML = `1. HyperScale Telemetry Grid (1.2M req/sec)<br>2. Nova Autonomous Studio (AI workspace)<br>3. Synthetix Settlement Engine (Fintech Gateway)`;
+                    break;
+                case 'contact':
+                    response.innerHTML = `Direct Email: <a href="mailto:alex.vance@engineer.dev" class="text-cyan-400 underline">alex.vance@engineer.dev</a> | GitHub: <a href="https://github.com" target="_blank" class="text-cyan-400 underline">github.com</a>`;
+                    break;
+                case 'sudo hire':
+                    response.innerHTML = `<span class="text-emerald-400 font-bold">Permission granted!</span> Initiating priority interview sequence. Dispatching transmission to alex.vance@engineer.dev...`;
+                    break;
+                case 'clear':
+                    terminalBody.innerHTML = '';
+                    terminalInput.value = '';
+                    return;
+                default:
+                    response.innerHTML = `<span class="text-rose-400">command not found:</span> ${escapeHtml(command)}. Type <span class="text-cyan-300">'help'</span> for list of commands.`;
+                    break;
+            }
+
+            terminalBody.appendChild(response);
+            terminalInput.value = '';
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/[&<>"']/g, function(m) {
+                return {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                }[m];
+            });
+        }
+
+        // Command Palette (Ctrl+K)
+        function openCommandPalette() {
+            playTechBeep(680, 0.08);
+            const palette = document.getElementById('command-palette-modal');
+            const input = document.getElementById('palette-search');
+            if (palette) {
+                palette.classList.remove('hidden');
+                palette.classList.add('flex');
+                if (input) {
+                    input.value = '';
+                    setTimeout(() => input.focus(), 50);
+                }
+            }
+        }
+
+        function closeCommandPalette() {
+            const palette = document.getElementById('command-palette-modal');
+            if (palette) {
+                palette.classList.add('hidden');
+                palette.classList.remove('flex');
+            }
+        }
+
+        // Global Keydown Listeners (Ctrl+K & Escape)
+        window.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                const palette = document.getElementById('command-palette-modal');
+                if (palette && !palette.classList.contains('hidden')) {
+                    closeCommandPalette();
+                } else {
+                    openCommandPalette();
+                }
+            } else if (e.key === 'Escape') {
+                closeCommandPalette();
+            }
+        });
+    </script>
+
+    <!-- Command Palette Modal -->
+    <div id="command-palette-modal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-md hidden items-start justify-center pt-24 px-4">
+        <div class="relative w-full max-w-xl glass-panel rounded-2xl border border-cyan-500/40 shadow-[0_0_50px_rgba(0,240,255,0.2)] overflow-hidden font-mono text-xs">
+            <div class="p-4 border-b border-slate-800 flex items-center space-x-3 bg-slate-900/90">
+                <i data-lucide="search" class="w-4 h-4 text-cyan-400"></i>
+                <input id="palette-search" type="text" placeholder="Type a command or jump to section..." class="flex-1 bg-transparent text-slate-100 placeholder-slate-500 focus:outline-none text-xs">
+                <button onclick="closeCommandPalette()" class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 hover:text-white text-[10px]">ESC</button>
+            </div>
+            <div class="p-3 max-h-80 overflow-y-auto space-y-1 text-slate-300">
+                <div class="px-3 py-1.5 text-[10px] uppercase tracking-wider text-cyan-400 font-bold">Actions &amp; Scripts</div>
+                
+                <button onclick="switchIdeTab('deploy'); executeCurrentTab(); closeCommandPalette();" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-cyan-500/10 hover:text-cyan-300 flex items-center justify-between group transition-colors">
+                    <span class="flex items-center gap-2">
+                        <i data-lucide="terminal" class="w-4 h-4 text-purple-400 group-hover:text-cyan-300"></i>
+                        <span>Execute deploy.sh (Kubernetes Canary)</span>
+                    </span>
+                    <span class="text-[10px] text-slate-500 font-mono">Action</span>
+                </button>
+
+                <button onclick="switchIdeTab('engineer'); executeCurrentTab(); closeCommandPalette();" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-cyan-500/10 hover:text-cyan-300 flex items-center justify-between group transition-colors">
+                    <span class="flex items-center gap-2">
+                        <i data-lucide="file-code" class="w-4 h-4 text-cyan-400"></i>
+                        <span>Run engineer.ts Profile</span>
+                    </span>
+                    <span class="text-[10px] text-slate-500 font-mono">Action</span>
+                </button>
+
+                <button onclick="copyEmailToClipboard(); closeCommandPalette();" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-cyan-500/10 hover:text-cyan-300 flex items-center justify-between group transition-colors">
+                    <span class="flex items-center gap-2">
+                        <i data-lucide="copy" class="w-4 h-4 text-emerald-400"></i>
+                        <span>Copy Email Address</span>
+                    </span>
+                    <span class="text-[10px] text-slate-500 font-mono">alex.vance@engineer.dev</span>
+                </button>
+
+                <div class="px-3 pt-3 pb-1.5 text-[10px] uppercase tracking-wider text-cyan-400 font-bold">Jump To Section</div>
+
+                <a href="#projects" onclick="closeCommandPalette()" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-800/80 hover:text-white flex items-center justify-between transition-colors">
+                    <span class="flex items-center gap-2">
+                        <i data-lucide="layers" class="w-4 h-4 text-slate-400"></i>
+                        <span>Flagship Projects Grid</span>
+                    </span>
+                    <span class="text-[10px] text-slate-500">#projects</span>
+                </a>
+
+                <a href="#terminal-section" onclick="closeCommandPalette()" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-800/80 hover:text-white flex items-center justify-between transition-colors">
+                    <span class="flex items-center gap-2">
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                        <span>Interactive CLI Terminal</span>
+                    </span>
+                    <span class="text-[10px] text-slate-500">#terminal-section</span>
+                </a>
+
+                <a href="#contact" onclick="closeCommandPalette()" class="w-full text-left px-3 py-2.5 rounded-lg hover:bg-slate-800/80 hover:text-white flex items-center justify-between transition-colors">
+                    <span class="flex items-center gap-2">
+                        <i data-lucide="mail" class="w-4 h-4 text-slate-400"></i>
+                        <span>Contact &amp; Transmissions</span>
+                    </span>
+                    <span class="text-[10px] text-slate-500">#contact</span>
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
